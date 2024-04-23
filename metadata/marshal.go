@@ -18,6 +18,7 @@
 package metadata
 
 import (
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -535,15 +536,23 @@ func (role *SuccinctRoles) UnmarshalJSON(data []byte) error {
 }
 
 func (b *HexBytes) UnmarshalJSON(data []byte) error {
+	// TODO: Properly handle HEX vs Base64. Maybe looking at len(data)
 	if len(data) < 2 || len(data)%2 != 0 || data[0] != '"' || data[len(data)-1] != '"' {
 		return errors.New("tuf: invalid JSON hex bytes")
 	}
+
+	// Try HEX first
 	res := make([]byte, hex.DecodedLen(len(data)-2))
-	_, err := hex.Decode(res, data[1:len(data)-1])
+	realLen, err := hex.Decode(res, data[1:len(data)-1])
 	if err != nil {
-		return err
+		// Try base64 as well
+		res = make([]byte, base64.StdEncoding.DecodedLen(len(data)-2))
+		realLen, err = base64.StdEncoding.Decode(res, data[1:len(data)-1])
+		if err != nil {
+			return err
+		}
 	}
-	*b = res
+	*b = res[:realLen]
 	return nil
 }
 
