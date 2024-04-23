@@ -33,7 +33,9 @@ func (signed RootType) MarshalJSON() ([]byte, error) {
 		copyMapValues(signed.UnrecognizedFields, dict)
 	}
 	dict["_type"] = signed.Type
-	dict["spec_version"] = signed.SpecVersion
+	if signed.SpecVersion != "" {
+		dict["spec_version"] = signed.SpecVersion
+	}
 	dict["consistent_snapshot"] = signed.ConsistentSnapshot
 	dict["version"] = signed.Version
 	dict["expires"] = signed.Expires
@@ -71,7 +73,9 @@ func (signed SnapshotType) MarshalJSON() ([]byte, error) {
 		copyMapValues(signed.UnrecognizedFields, dict)
 	}
 	dict["_type"] = signed.Type
-	dict["spec_version"] = signed.SpecVersion
+	if signed.SpecVersion != "" {
+		dict["spec_version"] = signed.SpecVersion
+	}
 	dict["version"] = signed.Version
 	dict["expires"] = signed.Expires
 	dict["meta"] = signed.Meta
@@ -105,7 +109,9 @@ func (signed TimestampType) MarshalJSON() ([]byte, error) {
 		copyMapValues(signed.UnrecognizedFields, dict)
 	}
 	dict["_type"] = signed.Type
-	dict["spec_version"] = signed.SpecVersion
+	if signed.SpecVersion != "" {
+		dict["spec_version"] = signed.SpecVersion
+	}
 	dict["version"] = signed.Version
 	dict["expires"] = signed.Expires
 	dict["meta"] = signed.Meta
@@ -139,7 +145,9 @@ func (signed TargetsType) MarshalJSON() ([]byte, error) {
 		copyMapValues(signed.UnrecognizedFields, dict)
 	}
 	dict["_type"] = signed.Type
-	dict["spec_version"] = signed.SpecVersion
+	if signed.SpecVersion != "" {
+		dict["spec_version"] = signed.SpecVersion
+	}
 	dict["version"] = signed.Version
 	dict["expires"] = signed.Expires
 	dict["targets"] = signed.Targets
@@ -249,7 +257,9 @@ func (key Key) MarshalJSON() ([]byte, error) {
 		copyMapValues(key.UnrecognizedFields, dict)
 	}
 	dict["keytype"] = key.Type
-	dict["scheme"] = key.Scheme
+	if key.Scheme != "" {
+		dict["scheme"] = key.Scheme
+	}
 	dict["keyval"] = key.Value
 	return json.Marshal(dict)
 }
