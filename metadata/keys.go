@@ -26,6 +26,7 @@ import (
 	"crypto/x509"
 	"encoding/hex"
 	"fmt"
+	"strings"
 
 	"github.com/secure-systems-lab/go-securesystemslib/cjson"
 	"github.com/sigstore/sigstore/pkg/cryptoutils"
@@ -44,7 +45,7 @@ const (
 
 // ToPublicKey generate crypto.PublicKey from metadata type Key
 func (k *Key) ToPublicKey() (crypto.PublicKey, error) {
-	switch k.Type {
+	switch strings.ToLower(k.Type) {
 	case KeyTypeRSASSA_PSS_SHA256:
 		publicKey, err := cryptoutils.UnmarshalPEMToPublicKey([]byte(k.Value.PublicKey))
 		if err != nil {
