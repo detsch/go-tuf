@@ -29,9 +29,9 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/detsch/go-tuf/v2/metadata"
+	"github.com/detsch/go-tuf/v2/metadata/repository"
 	"github.com/sigstore/sigstore/pkg/signature"
-	"github.com/theupdateframework/go-tuf/v2/metadata"
-	"github.com/theupdateframework/go-tuf/v2/metadata/repository"
 )
 
 // A TUF repository example using the low-level TUF Metadata API.

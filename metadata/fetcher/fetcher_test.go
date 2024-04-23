@@ -22,8 +22,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/detsch/go-tuf/v2/metadata"
 	"github.com/stretchr/testify/assert"
-	"github.com/theupdateframework/go-tuf/v2/metadata"
 )
 
 func TestDownLoadFile(t *testing.T) {

@@ -26,9 +26,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/detsch/go-tuf/v2/metadata"
+	"github.com/detsch/go-tuf/v2/metadata/repository"
 	"github.com/sigstore/sigstore/pkg/signature"
-	"github.com/theupdateframework/go-tuf/v2/metadata"
-	"github.com/theupdateframework/go-tuf/v2/metadata/repository"
 )
 
 func main() {

@@ -31,9 +31,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/theupdateframework/go-tuf/v2/metadata"
-	"github.com/theupdateframework/go-tuf/v2/metadata/config"
-	"github.com/theupdateframework/go-tuf/v2/metadata/trustedmetadata"
+	"github.com/detsch/go-tuf/v2/metadata"
+	"github.com/detsch/go-tuf/v2/metadata/config"
+	"github.com/detsch/go-tuf/v2/metadata/trustedmetadata"
 )
 
 // Client update workflow implementation

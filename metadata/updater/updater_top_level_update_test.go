@@ -28,10 +28,10 @@ import (
 	"github.com/sigstore/sigstore/pkg/signature"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/theupdateframework/go-tuf/v2/internal/testutils"
-	"github.com/theupdateframework/go-tuf/v2/internal/testutils/simulator"
-	"github.com/theupdateframework/go-tuf/v2/metadata"
-	"github.com/theupdateframework/go-tuf/v2/metadata/config"
+	"github.com/detsch/go-tuf/v2/internal/testutils"
+	"github.com/detsch/go-tuf/v2/internal/testutils/simulator"
+	"github.com/detsch/go-tuf/v2/metadata"
+	"github.com/detsch/go-tuf/v2/metadata/config"
 )
 
 func TestMain(m *testing.M) {

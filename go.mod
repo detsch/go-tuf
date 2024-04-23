@@ -1,4 +1,4 @@
-module github.com/theupdateframework/go-tuf/v2
+module github.com/detsch/go-tuf/v2
 
 go 1.21
 

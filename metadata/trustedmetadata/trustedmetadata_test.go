@@ -24,11 +24,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/detsch/go-tuf/v2/internal/testutils"
+	"github.com/detsch/go-tuf/v2/metadata"
 	"github.com/sigstore/sigstore/pkg/cryptoutils"
 	"github.com/sigstore/sigstore/pkg/signature"
 	"github.com/stretchr/testify/assert"
-	"github.com/theupdateframework/go-tuf/v2/internal/testutils"
-	"github.com/theupdateframework/go-tuf/v2/metadata"
 )
 
 var allRoles map[string][]byte
