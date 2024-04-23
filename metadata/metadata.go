@@ -901,6 +901,7 @@ func checkType[T Roles](data []byte) error {
 		return err
 	}
 	signedType := m["signed"].(map[string]any)["_type"].(string)
+	signedType = strings.ToLower(signedType)
 	switch i.(type) {
 	case *RootType:
 		if ROOT != signedType {

@@ -19,6 +19,7 @@ package trustedmetadata
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/theupdateframework/go-tuf/v2/metadata"
@@ -67,7 +68,7 @@ func (trusted *TrustedMetadata) UpdateRoot(rootData []byte) (*metadata.Metadata[
 		return nil, err
 	}
 	// check metadata type matches root
-	if newRoot.Signed.Type != metadata.ROOT {
+	if strings.ToLower(newRoot.Signed.Type) != metadata.ROOT {
 		return nil, &metadata.ErrRepository{Msg: fmt.Sprintf("expected %s, got %s", metadata.ROOT, newRoot.Signed.Type)}
 	}
 	// verify that new root is signed by trusted root
@@ -114,7 +115,7 @@ func (trusted *TrustedMetadata) UpdateTimestamp(timestampData []byte) (*metadata
 		return nil, err
 	}
 	// check metadata type matches timestamp
-	if newTimestamp.Signed.Type != metadata.TIMESTAMP {
+	if strings.ToLower(newTimestamp.Signed.Type) != metadata.TIMESTAMP {
 		return nil, &metadata.ErrRepository{Msg: fmt.Sprintf("expected %s, got %s", metadata.TIMESTAMP, newTimestamp.Signed.Type)}
 	}
 	// verify that new timestamp is signed by trusted root
@@ -202,7 +203,7 @@ func (trusted *TrustedMetadata) UpdateSnapshot(snapshotData []byte, isTrusted bo
 		return nil, err
 	}
 	// check metadata type matches snapshot
-	if newSnapshot.Signed.Type != metadata.SNAPSHOT {
+	if strings.ToLower(newSnapshot.Signed.Type) != metadata.SNAPSHOT {
 		return nil, &metadata.ErrRepository{Msg: fmt.Sprintf("expected %s, got %s", metadata.SNAPSHOT, newSnapshot.Signed.Type)}
 	}
 	// verify that new snapshot is signed by trusted root
@@ -302,7 +303,7 @@ func (trusted *TrustedMetadata) UpdateDelegatedTargets(targetsData []byte, roleN
 		return nil, err
 	}
 	// check metadata type matches targets
-	if newDelegate.Signed.Type != metadata.TARGETS {
+	if strings.ToLower(newDelegate.Signed.Type) != metadata.TARGETS {
 		return nil, &metadata.ErrRepository{Msg: fmt.Sprintf("expected %s, got %s", metadata.TARGETS, newDelegate.Signed.Type)}
 	}
 	// get delegator metadata and verify the new delegatee
@@ -342,7 +343,7 @@ func (trusted *TrustedMetadata) loadTrustedRoot(rootData []byte) error {
 		return err
 	}
 	// check metadata type matches root
-	if newRoot.Signed.Type != metadata.ROOT {
+	if strings.ToLower(newRoot.Signed.Type) != metadata.ROOT {
 		return &metadata.ErrRepository{Msg: fmt.Sprintf("expected %s, got %s", metadata.ROOT, newRoot.Signed.Type)}
 	}
 	// verify root by itself
