@@ -132,8 +132,12 @@ func (trusted *TrustedMetadata) UpdateTimestamp(timestampData []byte) (*metadata
 		}
 		// keep using old timestamp if versions are equal
 		if newTimestamp.Signed.Version == trusted.Timestamp.Signed.Version {
-			log.Info("New timestamp version equals the old one", "new", newTimestamp.Signed.Version, "old", trusted.Timestamp.Signed.Version)
-			return nil, &metadata.ErrEqualVersionNumber{Msg: fmt.Sprintf("new timestamp version %d equals the old one %d", newTimestamp.Signed.Version, trusted.Timestamp.Signed.Version)}
+			log.Info("XX New timestamp version equals the old one", "new", newTimestamp.Signed.Version, "old", trusted.Timestamp.Signed.Version)
+			if newTimestamp.Signed.Meta[fmt.Sprintf("%s.json", metadata.SNAPSHOT)].Hashes.Equal(trusted.Timestamp.Signed.Meta[fmt.Sprintf("%s.json", metadata.SNAPSHOT)].Hashes) {
+				return nil, &metadata.ErrEqualVersionNumber{Msg: fmt.Sprintf("XX new timestamp version %d equals the old one %d", newTimestamp.Signed.Version, trusted.Timestamp.Signed.Version)}
+			} else {
+				log.Info("XX New timestamp references a new snapshot. Updating")
+			}
 		}
 		// prevent rolling back snapshot version
 		snapshotMeta := trusted.Timestamp.Signed.Meta[fmt.Sprintf("%s.json", metadata.SNAPSHOT)]

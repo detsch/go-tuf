@@ -356,7 +356,8 @@ func (update *Updater) loadSnapshot() error {
 		log.Info("Local snapshot does not exist")
 	} else {
 		// successfully read a local snapshot metadata, so let's try to verify and load it to the trusted metadata set
-		_, err = update.trusted.UpdateSnapshot(data, true)
+		// FIO: Setting "trusted" parameter to false in order to force re-validation of the metadata hashes, in case the timestamp was updated. There is probably a better way to do this
+		_, err = update.trusted.UpdateSnapshot(data, false)
 		if err != nil {
 			// this means snapshot verification/loading failed
 			if errors.Is(err, &metadata.ErrRepository{}) {
